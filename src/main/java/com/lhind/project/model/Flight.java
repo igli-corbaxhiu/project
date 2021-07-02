@@ -3,6 +3,7 @@ package com.lhind.project.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
@@ -11,12 +12,19 @@ public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @NotBlank
     private String fromPlace;
+
+    @NotBlank
     private String toPlace;
-    @DateTimeFormat
+
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date departureDate;
-    @DateTimeFormat
+
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date arrivalDate;
+
     @ManyToOne
     private Trip trip;
 
@@ -79,6 +87,7 @@ public class Flight {
                 ", toPlace='" + toPlace + '\'' +
                 ", departureDate=" + departureDate +
                 ", arrivalDate=" + arrivalDate +
+                ", trip=" + trip +
                 '}';
     }
 }

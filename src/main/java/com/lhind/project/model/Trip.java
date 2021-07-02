@@ -15,17 +15,17 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "Select one of the options!")
     private String tripReason;
 
-    @NotBlank
+    @NotBlank(message = "Please enter your trip description!")
     @Size(max = 100)
     private String tripDescription;
 
-    @NotBlank
+    @NotBlank(message = "\"From place\" field must not be blank!")
     private String fromPlace;
 
-    @NotBlank
+    @NotBlank(message = "\"To place\" field must not be blank!")
     private String toPlace;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")

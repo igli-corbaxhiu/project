@@ -22,4 +22,9 @@ public class TripServiceImp implements TripService {
     public Trip getById(int id) {
         return tripRepository.getById(id);
     }
+
+    @Override
+    public void delete(Trip trip) {
+        tripRepository.delete(trip);
+    }
 }

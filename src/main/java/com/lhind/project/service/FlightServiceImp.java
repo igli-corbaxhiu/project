@@ -22,4 +22,9 @@ public class FlightServiceImp implements FlightService {
     public Flight getById(int id) {
         return flightRepository.getById(id);
     }
+
+    @Override
+    public void delete(Flight flight) {
+        flightRepository.delete(flight);
+    }
 }

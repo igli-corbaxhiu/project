@@ -6,5 +6,5 @@ public interface TripService {
 
     void save(Trip trip);
     Trip getById(int id);
-
+    void delete(Trip trip);
 }

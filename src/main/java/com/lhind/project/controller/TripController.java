@@ -1,9 +1,7 @@
 package com.lhind.project.controller;
 
 import com.lhind.project.model.Trip;
-import com.lhind.project.model.User;
 import com.lhind.project.service.TripService;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +26,8 @@ public class TripController {
     @GetMapping(value = "/trip")
     public ModelAndView showForm(ModelMap modelMap) {
         ModelAndView modelAndView = new ModelAndView();
-
         Trip trip = new Trip();
         modelAndView.addObject("trip", trip);
-
         List<String> tripReason = Arrays.asList("Meeting", "Training", "Project", "Workshop", "Event", "Other");
         modelMap.addAttribute("tripReason", tripReason);
         modelAndView.setViewName("trip");
@@ -51,6 +47,8 @@ public class TripController {
         }else {
             tripService.save(trip);
             modelAndView.addObject("successMessage", "Trip is registered successfully!");
+            List<String> tripReason = Arrays.asList("Meeting", "Training", "Project", "Workshop", "Event", "Other");
+            modelMap.addAttribute("tripReason", tripReason);
         }
         modelAndView.addObject("trip", new Trip());
         modelAndView.setViewName("trip");

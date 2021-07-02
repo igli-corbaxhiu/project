@@ -1,31 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
     <title>Trip Registration</title>
-    <style type="text/css">
-        button {
-            padding: 10px;
-        }
-        span {
-            color: red;
-            font-style: italic;
-        }
-        form {
-            display: table;
-        }
-        form div {
-            display: table-row;
-        }
-        label, input, span, select {
-            display: table-cell;
-            margin: 5px;
-            text-align: left;
-        }
-        form div div {
-            display: table-cell;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body style="background-color: #ededed;">
 <div style="background-color: #337ab7; height: 50px;"></div>
@@ -35,37 +14,47 @@
     <h1>Trip Registration</h1>
     <form action="#" th:action="@{/trip}" method="post" th:object="${trip}">
         <div>
-            <label>Trip Reason:</label>
+            <label>Trip Reason</label>
             <select th:field="*{tripReason}">
                 <option th:each="p : ${tripReason}" th:value="${p}" th:text="${p}" />
             </select>
         </div>
-
-        <div>
-            <label>Trip Description:</label>
-            <textarea rows="3" cols="25" th:field="*{tripDescription}"></textarea>
+        <div class="form-group">
+            <div class="">
+                <label>Trip Description</label>
+                <textarea rows="3" cols="25" th:field="*{tripDescription}" class="form-control"></textarea>
+            </div>
         </div>
-
-        <div>
-            <label>From Place:</label>
-            <textarea rows="2" cols="25" th:field="*{fromPlace}"></textarea>
+        <div class="form-group">
+            <div class="">
+                <label>From Place</label>
+                <textarea rows="3" cols="25" th:field="*{fromPlace}" class="form-control"></textarea>
+            </div>
         </div>
-        <div>
-            <label>To Place:</label>
-            <textarea rows="2" cols="25" th:field="*{toPlace}"></textarea>
+        <div class="form-group">
+            <div class="">
+                <label>To Place</label>
+                <textarea rows="3" cols="25" th:field="*{toPlace}" class="form-control"></textarea>
+            </div>
         </div>
-        <div>
+        <div class="form-group">
+            <div class="">
             <label>Departure date:</label>
-            <input type="date" th:field="*{departureDate}" />
+            <input type="date" required="true" th:field="*{departureDate}" />
+        </div>
         </div>
 
-        <div>
+        <div class="form-group">
+            <div class="">
             <label>Arrival date:</label>
-            <input type="date" th:field="*{arrivalDate}" />
+            <input type="date" required="true" th:field="*{arrivalDate}" />
+        </div>
         </div>
 
-        <div>
-            <div><button type="submit">Register</button></div>
+        <div class="form-group">
+            <div class="">
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </div>
         </div>
         <span th:utext="${successMessage}"></span>
         <div class="alert alert-success alert-dismissible col-sm-12"

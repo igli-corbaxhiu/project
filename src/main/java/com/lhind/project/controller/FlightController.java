@@ -1,45 +1,49 @@
-//package com.lhind.project.controller;
-//
-//import com.lhind.project.model.Flight;
-//import com.lhind.project.model.User;
-//import org.springframework.ui.Model;
-//import org.springframework.validation.BindingResult;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//import javax.validation.Valid;
-//import java.util.Arrays;
-//import java.util.List;
-//
-//@RestController
-//public class FlightController {
-//
-//    @GetMapping("/register")
-//    public String showForm(Model model) {
-//        User user = new User();
-//        model.addAttribute("user", user);
-//
-//        List<String> listProfession = Arrays.asList("Developer", "Tester", "Architect");
-//        model.addAttribute("listProfession", listProfession);
-//
-//        return "register_form";
-//    }
-//
-//    @PostMapping("/register")
-//    public String submitForm(@Valid @ModelAttribute("flight") Flight flight,
-//                             BindingResult bindingResult, Model model) {
-//        System.out.println(flight);
-//
-//        if (bindingResult.hasErrors()) {
-//            List<String> trips = Arrays.asList("Developer", "Tester", "Architect");
-//            model.addAttribute("listProfession", trips);
-//
-//            return "register_form";
-//        } else {
-//            return "register_success";
-//        }
-//    }
-//
-//}
+package com.lhind.project.controller;
+
+import com.lhind.project.model.Flight;
+import com.lhind.project.service.FlightService;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+
+@RestController
+public class FlightController {
+
+    private final FlightService flightService;
+
+    public FlightController(FlightService flightService) {
+        this.flightService = flightService;
+    }
+
+    @GetMapping(value = "/flight")
+    public ModelAndView showForm() {
+        ModelAndView modelAndView = new ModelAndView();
+        Flight flight = new Flight();
+        modelAndView.addObject("flight", flight);
+        modelAndView.setViewName("flight");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/flight")
+    public ModelAndView submitForm(@Valid @ModelAttribute("flight") Flight flight,
+                                   BindingResult bindingResult, ModelMap modelMap) {
+        ModelAndView modelAndView = new ModelAndView();
+        if(bindingResult.hasErrors()) {
+            modelAndView.addObject("successMessage", "Please correct the errors in form!");
+            modelMap.addAttribute("bindingResult", bindingResult);
+        }else {
+            flightService.save(flight);
+            modelAndView.addObject("successMessage", "Flight is registered successfully!");
+        }
+        modelAndView.addObject("flight", new Flight());
+        modelAndView.setViewName("flight");
+        return modelAndView;
+    }
+
+}

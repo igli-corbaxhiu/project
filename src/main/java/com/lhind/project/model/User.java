@@ -98,4 +98,17 @@ public class User {
     public void setTrips(List<Trip> trips) {
         this.trips = trips;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                ", trips=" + trips +
+                '}';
+    }
 }

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,6 +12,7 @@ public class Trip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "trip_id")
     private int id;
 
     @NotBlank(message = "Select one of the options!")
@@ -30,8 +32,7 @@ public class Trip {
 
     private java.sql.Date arrivalDate;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "trip_flight", joinColumns = @JoinColumn(name = "trip_id"), inverseJoinColumns = @JoinColumn(name = "flight_id"))
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.REMOVE)
     private Set<Flight> flights;
 
     @ManyToOne

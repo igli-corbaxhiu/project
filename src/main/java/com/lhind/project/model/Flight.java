@@ -5,12 +5,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Flight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "flight_id")
     private int id;
 
     @NotBlank(message = "\"From place\" field must not be blank!")
@@ -24,6 +26,10 @@ public class Flight {
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date arrivalDate;
+
+    @ManyToOne
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
 
     public Flight() {
     }
@@ -68,6 +74,14 @@ public class Flight {
         this.arrivalDate = arrivalDate;
     }
 
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
+
     @Override
     public String toString() {
         return "Flight{" +
@@ -76,6 +90,7 @@ public class Flight {
                 ", toPlace='" + toPlace + '\'' +
                 ", departureDate=" + departureDate +
                 ", arrivalDate=" + arrivalDate +
+                ", trip=" + trip +
                 '}';
     }
 }

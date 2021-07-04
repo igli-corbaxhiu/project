@@ -25,9 +25,6 @@ public class Flight {
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date arrivalDate;
 
-    @ManyToOne
-    private Trip trip;
-
     public Flight() {
     }
 
@@ -71,14 +68,6 @@ public class Flight {
         this.arrivalDate = arrivalDate;
     }
 
-    public Trip getTrip() {
-        return trip;
-    }
-
-    public void setTrip(Trip trip) {
-        this.trip = trip;
-    }
-
     @Override
     public String toString() {
         return "Flight{" +
@@ -87,7 +76,6 @@ public class Flight {
                 ", toPlace='" + toPlace + '\'' +
                 ", departureDate=" + departureDate +
                 ", arrivalDate=" + arrivalDate +
-                ", trip=" + trip +
                 '}';
     }
 }

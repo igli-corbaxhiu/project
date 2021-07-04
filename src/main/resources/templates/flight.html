@@ -12,7 +12,7 @@
 
   <div class="row col-lg-4 col-lg-offset-4" style="margin-top: 20px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
     <h1>Trip Registration</h1>
-    <form action="#" th:action="@{/flight}" method="post" th:object="${flight}">
+    <form action="#" th:action="@{/login/user/flight}" method="post" th:object="${flight}">
       <div class="form-group">
         <div class="">
           <label>From Place</label>
@@ -38,10 +38,16 @@
           <input type="date" th:field="*{arrivalDate}" />
         </div>
       </div>
+<!--      <div class="form-group">-->
+<!--        <div class="">-->
+<!--          <label>Id of the trip this flight contains:</label>-->
+<!--          <input type="number" th:field="*{trip}" />-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="form-group">
         <div class="">
           <label>Id of the trip this flight contains:</label>
-          <input type="number" th:field="*{trip}" />
+          <input type="number"  th:field="*{trip.id}" />
         </div>
       </div>
 

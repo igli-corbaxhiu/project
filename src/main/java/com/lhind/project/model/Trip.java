@@ -1,12 +1,10 @@
 package com.lhind.project.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Trip {
@@ -28,13 +26,13 @@ public class Trip {
     @NotBlank(message = "\"To place\" field must not be blank!")
     private String toPlace;
 
-
     private java.sql.Date departureDate;
 
     private java.sql.Date arrivalDate;
 
-    @OneToMany
-    private List<Flight> flightList;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "trip_flight", joinColumns = @JoinColumn(name = "trip_id"), inverseJoinColumns = @JoinColumn(name = "flight_id"))
+    private Set<Flight> flights;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -49,14 +47,6 @@ public class Trip {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public List<Flight> getFlightList() {
-        return flightList;
-    }
-
-    public void setFlightList(List<Flight> flightList) {
-        this.flightList = flightList;
     }
 
     public String getTripReason() {
@@ -107,6 +97,14 @@ public class Trip {
         this.arrivalDate = arrivalDate;
     }
 
+    public Set<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(Set<Flight> flights) {
+        this.flights = flights;
+    }
+
     public User getUser() {
         return user;
     }
@@ -125,7 +123,8 @@ public class Trip {
                 ", toPlace='" + toPlace + '\'' +
                 ", departureDate=" + departureDate +
                 ", arrivalDate=" + arrivalDate +
-                ", flightList=" + flightList +
+                ", flights=" + flights +
+                ", user=" + user +
                 '}';
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/flight")
+@RequestMapping("/login/user/flight")
 public class FlightController {
 
     private final FlightService flightService;

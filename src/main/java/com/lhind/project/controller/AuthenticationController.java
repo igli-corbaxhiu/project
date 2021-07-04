@@ -2,6 +2,7 @@ package com.lhind.project.controller;
 
 import javax.validation.Valid;
 
+import com.lhind.project.model.Trip;
 import com.lhind.project.model.User;
 import com.lhind.project.service.UserService;
 import org.springframework.ui.ModelMap;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @RestController
+@RequestMapping("/login")
 public class AuthenticationController {
 
     final UserService userService;
@@ -19,14 +21,14 @@ public class AuthenticationController {
         this.userService = userService;
     }
 
-    @GetMapping(value = { "/login" })
+    @GetMapping
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @GetMapping(value = "/register")
+    @GetMapping("/admin/register")
     public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
@@ -35,23 +37,24 @@ public class AuthenticationController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/home")
+    @GetMapping("/user")
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home");
+        modelAndView.setViewName("user");
         return modelAndView;
     }
 
-    @GetMapping(value = "/admin")
+    @GetMapping("/admin")
     public ModelAndView adminHome() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin");
         return modelAndView;
     }
 
-    @PostMapping(value="/register")
+    @PostMapping("/admin/register")
     public ModelAndView registerUser(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
         ModelAndView modelAndView = new ModelAndView();
+        Trip trip = new Trip();
         if(bindingResult.hasErrors()) {
             modelAndView.addObject("successMessage", "Please correct the errors in form!");
             modelMap.addAttribute("bindingResult", bindingResult);
@@ -60,6 +63,7 @@ public class AuthenticationController {
             modelAndView.addObject("successMessage", "User already exists!");
         }
         else {
+            trip.setUser(user);
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User is registered successfully!");
         }

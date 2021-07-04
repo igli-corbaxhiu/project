@@ -39,10 +39,10 @@ public class LoginHandler extends SimpleUrlAuthenticationSuccessHandler{
             roles.add(a.getAuthority());
         }
         if (roles.contains("ADMIN")) {
-            url = "/admin";
+            url = "/login/admin";
         }
         else if (roles.contains("USER")) {
-            url = "/home";
+            url = "/login/user";
         }
         return url;
     }

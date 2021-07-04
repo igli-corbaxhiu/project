@@ -13,10 +13,10 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "\"From place\" field must not be blank!")
     private String fromPlace;
 
-    @NotBlank
+    @NotBlank(message = "\"To place\" field must not be blank!")
     private String toPlace;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")

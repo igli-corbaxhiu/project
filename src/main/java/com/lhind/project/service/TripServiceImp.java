@@ -4,6 +4,8 @@ import com.lhind.project.model.Trip;
 import com.lhind.project.repository.TripRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TripServiceImp implements TripService {
 
@@ -27,4 +29,5 @@ public class TripServiceImp implements TripService {
     public void delete(Trip trip) {
         tripRepository.delete(trip);
     }
+
 }

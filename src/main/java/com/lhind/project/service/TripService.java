@@ -2,6 +2,8 @@ package com.lhind.project.service;
 
 import com.lhind.project.model.Trip;
 
+import java.util.List;
+
 public interface TripService {
 
     void save(Trip trip);

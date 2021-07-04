@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -28,14 +28,17 @@ public class Trip {
     @NotBlank(message = "\"To place\" field must not be blank!")
     private String toPlace;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private Date departureDate;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private Date arrivalDate;
+    private java.sql.Date departureDate;
+
+    private java.sql.Date arrivalDate;
 
     @OneToMany
     private List<Flight> flightList;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Trip() {
     }
@@ -102,6 +105,14 @@ public class Trip {
 
     public void setArrivalDate(Date arrivalDate) {
         this.arrivalDate = arrivalDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

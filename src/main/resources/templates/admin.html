@@ -10,7 +10,10 @@
 <div class="container-fluid" style="margin-top: 30px;">
 
   <div class="row col-lg-4 col-lg-offset-4" style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
-    Hello Admin!
+    <a th:href="@{/login/admin/register}">Click here to create new users!</a>
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sign Out"/>
+    </form>
   </div>
 </div>
 </html>

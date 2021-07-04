@@ -4,15 +4,13 @@ import com.lhind.project.model.Flight;
 import com.lhind.project.service.FlightService;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/flight")
 public class FlightController {
 
     private final FlightService flightService;
@@ -21,7 +19,7 @@ public class FlightController {
         this.flightService = flightService;
     }
 
-    @GetMapping(value = "/flight")
+    @GetMapping
     public ModelAndView showForm() {
         ModelAndView modelAndView = new ModelAndView();
         Flight flight = new Flight();
@@ -30,7 +28,7 @@ public class FlightController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/flight")
+    @PostMapping
     public ModelAndView submitForm(@Valid @ModelAttribute("flight") Flight flight,
                                    BindingResult bindingResult, ModelMap modelMap) {
         ModelAndView modelAndView = new ModelAndView();

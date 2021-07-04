@@ -1,17 +1,9 @@
 package com.lhind.project.model;
 
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -44,10 +36,12 @@ public class User {
     @Column(name = "password")
     private String password;
 
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Trip> trips;
 
     public int getId() {
         return id;
@@ -97,5 +91,11 @@ public class User {
         this.roles = roles;
     }
 
+    public List<Trip> getTrips() {
+        return trips;
+    }
 
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
+    }
 }

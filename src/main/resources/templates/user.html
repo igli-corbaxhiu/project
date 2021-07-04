@@ -10,7 +10,11 @@
 <div class="container-fluid" style="margin-top: 30px;">
 
   <div class="row col-lg-4 col-lg-offset-4" style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
-    Hello User!
+    <h4><a th:href="@{/login/user/trip}">Click here to apply for a new trip!</a></h4>
+    <h4><a th:href="@{/trip/{id}}">Click here to add flights to a trip!</a></h4>
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sign Out"/>
+    </form>
   </div>
 </div>
 </html>

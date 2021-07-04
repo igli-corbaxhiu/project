@@ -2,6 +2,7 @@ package com.lhind.project.service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import com.lhind.project.model.Role;
 import com.lhind.project.model.User;
@@ -41,4 +42,12 @@ public class UserServiceImp implements UserService {
         return alreadyExists;
     }
 
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User findById(int id) {
+        return userRepository.findById(id);
+    }
 }
